@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Card Clash</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section id="menu-screen" class="screen menu-screen active">
+      <div class="hero-copy">
+        <p class="eyebrow">Cyberpunk pixel card battle</p>
+        <h1>Neon Card Clash</h1>
+        <p class="hero-text">Escolha seu combatente, entre na arena e venca em duelos por turnos com ataques, defesa, energia e ultimate.</p>
+      </div>
+
+      <div class="menu-panel">
+        <button id="cpu-mode" class="primary-button" type="button">Jogar contra CPU</button>
+        <button id="online-mode" type="button">Modo online 1v1</button>
+        <button id="sound-toggle" type="button" aria-pressed="true">Som ligado</button>
+      </div>
+    </section>
+
+    <section id="online-screen" class="screen online-screen">
+      <header class="top-bar">
+        <button class="ghost-button" data-back-menu type="button">Voltar</button>
+        <div>
+          <p class="eyebrow">Modo online</p>
+          <h2>Sala 1v1</h2>
+        </div>
+      </header>
+
+      <div class="online-grid">
+        <article class="panel">
+          <h3>Criar sala</h3>
+          <button id="create-room" class="primary-button" type="button">Criar codigo</button>
+          <p id="created-room" class="status-text">Nenhuma sala criada.</p>
+        </article>
+
+        <article class="panel">
+          <h3>Entrar em sala</h3>
+          <label for="room-code">Codigo da sala</label>
+          <div class="room-form">
+            <input id="room-code" type="text" maxlength="6" placeholder="ABC123" autocomplete="off">
+            <button id="join-room" type="button">Entrar</button>
+          </div>
+          <p id="online-status" class="status-text">Conecte dois jogadores para iniciar.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="select-screen" class="screen select-screen">
+      <header class="top-bar">
+        <button class="ghost-button" data-back-menu type="button">Menu</button>
+        <div>
+          <p id="mode-label" class="eyebrow">Modo CPU</p>
+          <h2>Escolha sua carta</h2>
+        </div>
+      </header>
+
+      <div id="card-list" class="card-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="battle-screen" class="screen battle-screen">
+      <header class="battle-header">
+        <button id="leave-battle" class="ghost-button" type="button">Sair</button>
+        <div class="battle-status">
+          <p id="battle-mode" class="eyebrow">Arena</p>
+          <h2 id="turn-message">Aguardando selecao</h2>
+        </div>
+        <button id="restart-cpu" type="button">Nova luta</button>
+      </header>
+
+      <section class="arena">
+        <article class="fighter-zone player-zone">
+          <p class="fighter-label">Voce</p>
+          <div id="player-fighter" class="fighter-slot"></div>
+        </article>
+
+        <article class="combat-panel">
+          <div id="damage-layer" class="damage-layer" aria-hidden="true"></div>
+          <div id="battle-log" class="battle-log" aria-live="polite">A arena esta pronta.</div>
+          <div class="action-row">
+            <button id="basic-attack" class="primary-button" type="button" disabled>Ataque basico</button>
+            <button id="special-attack" type="button" disabled>Especial 100 EN</button>
+            <button id="defend-action" type="button" disabled>Defender</button>
+            <button id="ultimate-attack" type="button" disabled>Ultimate</button>
+          </div>
+        </article>
+
+        <article class="fighter-zone enemy-zone">
+          <p id="enemy-label" class="fighter-label">Oponente</p>
+          <div id="enemy-fighter" class="fighter-slot"></div>
+        </article>
+      </section>
+    </section>
+
+    <section id="result-modal" class="result-modal" aria-hidden="true">
+      <div class="result-card">
+        <p class="eyebrow">Fim de combate</p>
+        <h2 id="result-title">Vitoria</h2>
+        <p id="result-text">Voce venceu a batalha.</p>
+        <button id="result-button" class="primary-button" type="button">Continuar</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
